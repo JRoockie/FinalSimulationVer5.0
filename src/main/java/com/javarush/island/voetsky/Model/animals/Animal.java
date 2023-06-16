@@ -119,9 +119,12 @@ public abstract class Animal extends Nature implements CouldEat, CouldMultiply, 
                 int newY = yPos + randomY;
                 int newX = xPos + randomX;
 
-
-                    island.removeAnimal(xPos, yPos, this);
-                    island.setAnimalPosition(newX, newY, this);
+                if (newX < 0 || newY < 0) {
+                    newX = Math.abs(newX);
+                    newY = Math.abs(newY);
+                }
+                island.removeAnimal(xPos, yPos, this);
+                island.setAnimalPosition(newX, newY, this);
 
             }
         }
