@@ -4,7 +4,6 @@ import com.javarush.island.voetsky.Database.Database;
 import com.javarush.island.voetsky.Database.Island;
 import com.javarush.island.voetsky.Model.animals.Animal;
 import com.javarush.island.voetsky.Model.plants.Plant;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executors;
@@ -21,19 +20,30 @@ public class Model {
     public static List<Animal> herbivoreList = new ArrayList<>();
     public static ScheduledExecutorService scheduledThreadPool = Executors.newScheduledThreadPool(3);
 
-    public void init() throws Exception {
+    public void fillAllLists(){
         UtilityClass.fillAllLists();
+    }
 
-        island.setMaxTick(20);
-        island.makeIsland(150, 20,100);
-
-        UtilityClass.fillSimulationList(400, 1000 , 300);
-//        System.out.println(simulationList.toString());
-
+    public void makeIsland(int x,int y, int tick) {
+        island.makeIsland(x,y,tick);
+    }
+    public void fillSimulationList(int herbivores, int plants , int predators){
+        UtilityClass.fillSimulationList(herbivores, plants , predators);
+    }
+    public void setStartRandomPosition(){
         island.setStartRandomPosition(simulationList);
+    }
+    public void startPool(int secondsPeriod) {
+        scheduledThreadPool.scheduleWithFixedDelay(island, 0, secondsPeriod, TimeUnit.SECONDS);
+        island.startNature();
+    }
 
+    public void runDefaultSim() {
+        UtilityClass.fillAllLists();
+        island.makeIsland(3, 3,30);
+        UtilityClass.fillSimulationList(3, 3 , 0);
+        island.setStartRandomPosition(simulationList);
         scheduledThreadPool.scheduleWithFixedDelay(island, 0, 2, TimeUnit.SECONDS);
         island.startNature();
-
     }
 }

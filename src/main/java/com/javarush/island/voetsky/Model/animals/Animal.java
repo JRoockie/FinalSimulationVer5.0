@@ -119,10 +119,10 @@ public abstract class Animal extends Nature implements CouldEat, CouldMultiply, 
                 int newY = yPos + randomY;
                 int newX = xPos + randomX;
 
-                if(island.checkAnimalCount(newX,newY, this)){
+
                     island.removeAnimal(xPos, yPos, this);
                     island.setAnimalPosition(newX, newY, this);
-                }
+
             }
         }
 //        System.out.println(this + " i'm moving " + saturation);
@@ -147,7 +147,7 @@ public abstract class Animal extends Nature implements CouldEat, CouldMultiply, 
             }
             saturation -= saturationDecrement;
             try {
-                Thread.sleep(2000);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }

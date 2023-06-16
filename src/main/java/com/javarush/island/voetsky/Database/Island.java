@@ -60,6 +60,8 @@ public class Island implements Runnable {
         fillDisplayMatrix();
         generalNatureStats();
 
+
+
     }
 
     public synchronized void startNature() {
@@ -133,7 +135,7 @@ public class Island implements Runnable {
 
     public void setStartRandomPosition(ArrayList<Nature> arrayList) {
         for (var nature : arrayList) {
-            setAnimalPosition(UtilityClass.random(xSize - 1), UtilityClass.random(ySize - 1), nature);
+            setAnimalPosition(UtilityClass.random(xSize -1), UtilityClass.random(ySize -1), nature);
         }
         simulationList = arrayList;
 
@@ -230,8 +232,8 @@ public class Island implements Runnable {
                 currentTick++;
                 showIsland();
             } else {
+                System.out.println("\nКонец симуляции");
                 scheduledThreadPool.shutdown();
-
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
